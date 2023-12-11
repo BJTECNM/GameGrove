@@ -1,5 +1,6 @@
 package com.gamegrove.viewmodel.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,13 +20,10 @@ import androidx.compose.ui.unit.sp
 
 @Preview(showSystemUi = true)
 @Composable
-fun Register() {
+fun VerifyAcount() {
     var user = ""
-    var password = ""
-    var passwordConfirm = ""
-    var name = ""
-    var firstSurname = ""
-    var secondSurname = ""
+    var correo = ""
+    var code = ""
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -33,7 +31,7 @@ fun Register() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Registro",
+            text = "Verificar cuenta",
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold
         )
@@ -53,46 +51,10 @@ fun Register() {
         )
 
         OutlinedTextField(
-            value = name,
+            value = correo,
             onValueChange = {  },
             label = {
-                Text(text = "Nombre: ")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            singleLine = true
-        )
-
-        OutlinedTextField(
-            value = firstSurname,
-            onValueChange = {  },
-            label = {
-                Text(text = "Primer apellido: ")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            singleLine = true
-        )
-
-        OutlinedTextField(
-            value = secondSurname,
-            onValueChange = {  },
-            label = {
-                Text(text = "Segundo apellido (Opcional): ")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            singleLine = true
-        )
-
-        OutlinedTextField(
-            value = password,
-            onValueChange = {  },
-            label = {
-                Text(text = "Contraseña: ")
+                Text(text = "Correo: ")
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -101,17 +63,26 @@ fun Register() {
             visualTransformation = PasswordVisualTransformation()
         )
 
+        Space()
+
+        Text(
+            text = "Solicitar código",
+            fontSize = 18.sp,
+            modifier = Modifier.padding(4.dp).clickable { /* Acción al pulsar */ }
+        )
+
+        Space()
+
         OutlinedTextField(
-            value = passwordConfirm,
+            value = code,
             onValueChange = {  },
             label = {
-                Text(text = "Confirmar Contraseña: ")
+                Text(text = "Codigo: ")
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
-            singleLine = true,
-            visualTransformation = PasswordVisualTransformation()
+            singleLine = true
         )
 
         Space()
@@ -123,18 +94,10 @@ fun Register() {
                 .padding(start = 36.dp, end = 36.dp)
         ) {
             Text(
-                text = "Registrarse",
+                text = "Restaurar Contraseña",
                 fontSize = 18.sp,
                 modifier = Modifier.padding(4.dp)
             )
         }
-
-        Space()
-
-        Text(
-            text = "Ya tengo cuenta. Ingresar",
-            fontSize = 18.sp,
-            modifier = Modifier.padding(4.dp)
-        )
     }
 }

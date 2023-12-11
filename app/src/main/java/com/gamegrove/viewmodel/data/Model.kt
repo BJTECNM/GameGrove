@@ -24,6 +24,9 @@ class Model : ViewModel() {
     private val _secondSurname = MutableLiveData<String>()
     val secondSurname: LiveData<String> = _secondSurname
 
+    private val _code = MutableLiveData<String>()
+    val code: LiveData<String> = _code
+
     // Funciones para modificar los valores de las variables
     fun ResetValues() {
         _user.value = ""

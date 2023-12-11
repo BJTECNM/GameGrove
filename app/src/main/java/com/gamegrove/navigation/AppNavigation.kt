@@ -7,7 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.gamegrove.viewmodel.ui.Home
 import com.gamegrove.viewmodel.ui.Login
 import com.gamegrove.viewmodel.ui.Register
-import com.gamegrove.viewmodel.ui.Restore
+import com.gamegrove.viewmodel.ui.VerifyAcount
 
 @Composable
 fun AppNavigation() {
@@ -26,8 +26,8 @@ fun AppNavigation() {
             Register()
         }
 
-        composable(route = AppScreens.Restore.route) {
-            Restore()
+        composable(route = AppScreens.VerifyAcount.route) {
+            VerifyAcount()
         }
     }
 }

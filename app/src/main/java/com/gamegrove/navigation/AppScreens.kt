@@ -7,5 +7,5 @@ sealed class AppScreens(val route: String) {
 
     object Register : AppScreens("register")
 
-    object Restore : AppScreens("restore")
+    object VerifyAcount : AppScreens("verifyacount")
 }

@@ -19,13 +19,9 @@ import androidx.compose.ui.unit.sp
 
 @Preview(showSystemUi = true)
 @Composable
-fun Register() {
-    var user = ""
+fun RestorePassword() {
     var password = ""
     var passwordConfirm = ""
-    var name = ""
-    var firstSurname = ""
-    var secondSurname = ""
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -33,60 +29,12 @@ fun Register() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Registro",
+            text = "Restaurar Contraseña",
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold
         )
 
         Space()
-
-        OutlinedTextField(
-            value = user,
-            onValueChange = {  },
-            label = {
-                Text(text = "Usuario: ")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            singleLine = true
-        )
-
-        OutlinedTextField(
-            value = name,
-            onValueChange = {  },
-            label = {
-                Text(text = "Nombre: ")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            singleLine = true
-        )
-
-        OutlinedTextField(
-            value = firstSurname,
-            onValueChange = {  },
-            label = {
-                Text(text = "Primer apellido: ")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            singleLine = true
-        )
-
-        OutlinedTextField(
-            value = secondSurname,
-            onValueChange = {  },
-            label = {
-                Text(text = "Segundo apellido (Opcional): ")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            singleLine = true
-        )
 
         OutlinedTextField(
             value = password,
@@ -123,18 +71,10 @@ fun Register() {
                 .padding(start = 36.dp, end = 36.dp)
         ) {
             Text(
-                text = "Registrarse",
+                text = "Cambiar",
                 fontSize = 18.sp,
                 modifier = Modifier.padding(4.dp)
             )
         }
-
-        Space()
-
-        Text(
-            text = "Ya tengo cuenta. Ingresar",
-            fontSize = 18.sp,
-            modifier = Modifier.padding(4.dp)
-        )
     }
 }
