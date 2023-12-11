@@ -40,7 +40,7 @@ fun VerifyAcount() {
 
         OutlinedTextField(
             value = user,
-            onValueChange = {  },
+            onValueChange = { },
             label = {
                 Text(text = "Usuario: ")
             },
@@ -52,7 +52,7 @@ fun VerifyAcount() {
 
         OutlinedTextField(
             value = correo,
-            onValueChange = {  },
+            onValueChange = { },
             label = {
                 Text(text = "Correo: ")
             },
@@ -68,14 +68,16 @@ fun VerifyAcount() {
         Text(
             text = "Solicitar código",
             fontSize = 18.sp,
-            modifier = Modifier.padding(4.dp).clickable { /* Acción al pulsar */ }
+            modifier = Modifier
+                .padding(4.dp)
+                .clickable { /* Acción al pulsar */ }
         )
 
         Space()
 
         OutlinedTextField(
             value = code,
-            onValueChange = {  },
+            onValueChange = { },
             label = {
                 Text(text = "Codigo: ")
             },
@@ -88,7 +90,7 @@ fun VerifyAcount() {
         Space()
 
         Button(
-            onClick = {  },
+            onClick = { },
             Modifier
                 .fillMaxWidth()
                 .padding(start = 36.dp, end = 36.dp)

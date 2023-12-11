@@ -42,7 +42,7 @@ fun Register() {
 
         OutlinedTextField(
             value = user,
-            onValueChange = {  },
+            onValueChange = { },
             label = {
                 Text(text = "Usuario: ")
             },
@@ -54,7 +54,7 @@ fun Register() {
 
         OutlinedTextField(
             value = name,
-            onValueChange = {  },
+            onValueChange = { },
             label = {
                 Text(text = "Nombre: ")
             },
@@ -66,7 +66,7 @@ fun Register() {
 
         OutlinedTextField(
             value = firstSurname,
-            onValueChange = {  },
+            onValueChange = { },
             label = {
                 Text(text = "Primer apellido: ")
             },
@@ -78,7 +78,7 @@ fun Register() {
 
         OutlinedTextField(
             value = secondSurname,
-            onValueChange = {  },
+            onValueChange = { },
             label = {
                 Text(text = "Segundo apellido (Opcional): ")
             },
@@ -90,7 +90,7 @@ fun Register() {
 
         OutlinedTextField(
             value = password,
-            onValueChange = {  },
+            onValueChange = { },
             label = {
                 Text(text = "Contraseña: ")
             },
@@ -103,7 +103,7 @@ fun Register() {
 
         OutlinedTextField(
             value = passwordConfirm,
-            onValueChange = {  },
+            onValueChange = { },
             label = {
                 Text(text = "Confirmar Contraseña: ")
             },
@@ -117,7 +117,7 @@ fun Register() {
         Space()
 
         Button(
-            onClick = {  },
+            onClick = { },
             Modifier
                 .fillMaxWidth()
                 .padding(start = 36.dp, end = 36.dp)

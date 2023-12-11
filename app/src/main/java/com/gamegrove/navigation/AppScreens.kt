@@ -8,4 +8,6 @@ sealed class AppScreens(val route: String) {
     object Register : AppScreens("register")
 
     object VerifyAcount : AppScreens("verifyacount")
+
+    object RestorePassword : AppScreens("restorepassword")
 }

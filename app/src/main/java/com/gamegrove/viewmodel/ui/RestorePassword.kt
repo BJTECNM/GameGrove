@@ -38,7 +38,7 @@ fun RestorePassword() {
 
         OutlinedTextField(
             value = password,
-            onValueChange = {  },
+            onValueChange = { },
             label = {
                 Text(text = "Contraseña: ")
             },
@@ -51,7 +51,7 @@ fun RestorePassword() {
 
         OutlinedTextField(
             value = passwordConfirm,
-            onValueChange = {  },
+            onValueChange = { },
             label = {
                 Text(text = "Confirmar Contraseña: ")
             },
@@ -65,7 +65,7 @@ fun RestorePassword() {
         Space()
 
         Button(
-            onClick = {  },
+            onClick = { },
             Modifier
                 .fillMaxWidth()
                 .padding(start = 36.dp, end = 36.dp)
