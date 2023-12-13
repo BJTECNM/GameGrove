@@ -42,7 +42,7 @@ fun Login(navController: NavHostController) {
             fontWeight = FontWeight.Bold
         )
 
-        Space()
+        Spacer(modifier = Modifier.height(36.dp))
 
         Button(
             onClick = { navController.navigate(AppScreens.Home.route) },
@@ -87,7 +87,7 @@ fun PreviewLogin() {
             fontStyle = FontStyle.Italic
         )
 
-        Spacer(modifier = Modifier.height(36.dp))
+        Space()
 
         Button(
             onClick = { },
