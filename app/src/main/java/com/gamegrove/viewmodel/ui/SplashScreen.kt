@@ -13,9 +13,24 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.gamegrove.viewmodel.data.MyViewModel
 
-@Preview
 @Composable
 fun SplashScreen(navController: NavHostController, myViewModel: MyViewModel) {
+    Column(
+        Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "GameGrove",
+            fontSize = 40.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PreviewSplashScreen() {
     Column(
         Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

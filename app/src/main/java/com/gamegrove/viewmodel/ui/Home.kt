@@ -18,11 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.gamegrove.viewmodel.data.MyViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Preview(showSystemUi = true)
 @Composable
-fun Home(navController: NavHostController, viewModel: Any?) { // Home(navController: NavHostController)
+fun Home(navController: NavHostController, myViewModel: MyViewModel) { // Home(navController: NavHostController)
     Scaffold(
         topBar = { News() },
         content = { GamesCatalog() },
@@ -93,4 +93,16 @@ fun GridItem(game: Int) {
         AsyncImage(model = null, contentDescription = null)
         Text(text = "Nombre juego")
     }
+}
+
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Preview(showSystemUi = true)
+@Composable
+fun Home() {
+    Scaffold(
+        topBar = { News() },
+        content = { GamesCatalog() },
+        bottomBar = { Menu() }
+    )
 }

@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.gamegrove.navigation.AppScreens
 import com.gamegrove.viewmodel.data.MyViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -30,7 +30,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
 @Composable
-fun Login(navController: NavController, myViewModel: MyViewModel, ) {
+fun Login(navController: NavHostController, myViewModel: MyViewModel) {
     val context = LocalContext.current
     val token = "787993448256-ibvc6a600dsk9fabd6c7g84csakl8155.apps.googleusercontent.com"
     val launcher = rememberLauncherForActivityResult(
@@ -47,7 +47,7 @@ fun Login(navController: NavController, myViewModel: MyViewModel, ) {
         } catch (ex: Exception) {
             Log.d(
                 "login", "Google SignIn falló" +
-                        "${ex.localizedMessage}"
+                        ex.localizedMessage
             )
         }
     }
@@ -123,7 +123,7 @@ fun PreviewLogin() {
             fontStyle = FontStyle.Italic
         )
 
-        Space()
+        Spacer(modifier = Modifier.height(36.dp))
 
         Button(
             onClick = { },
