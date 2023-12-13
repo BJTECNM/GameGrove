@@ -13,7 +13,7 @@ import com.gamegrove.viewmodel.ui.SplashScreen
 fun AppNavigation(myViewModel: MyViewModel) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = AppScreens.Login.route) {
+    NavHost(navController = navController, startDestination = AppScreens.SplashScreen.route) {
         composable(route = AppScreens.Home.route) {
             Home(navController, myViewModel)
         }
@@ -23,7 +23,7 @@ fun AppNavigation(myViewModel: MyViewModel) {
         }
 
         composable(route = AppScreens.SplashScreen.route) {
-            SplashScreen(navController, myViewModel)
+            SplashScreen(navController)
         }
     }
 }

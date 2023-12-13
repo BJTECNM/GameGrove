@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.gamegrove.datastore.Preferences
 import com.gamegrove.navigation.AppScreens
 import com.gamegrove.viewmodel.data.MyViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -32,6 +33,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 @Composable
 fun Login(navController: NavHostController, myViewModel: MyViewModel) {
     val context = LocalContext.current
+    val preferences = Preferences(context = context)
     val token = "787993448256-ibvc6a600dsk9fabd6c7g84csakl8155.apps.googleusercontent.com"
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts
@@ -43,6 +45,8 @@ fun Login(navController: NavHostController, myViewModel: MyViewModel) {
             val credential = GoogleAuthProvider.getCredential(account.idToken, null)
             myViewModel.signInWithGoogle(credential) {
                 navController.navigate(route = AppScreens.Home.route)
+                preferences.saveCredential(account.email ?: "")
+                navController.popBackStack()
             }
         } catch (ex: Exception) {
             Log.d(

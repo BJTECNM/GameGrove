@@ -22,7 +22,7 @@ import com.gamegrove.viewmodel.data.MyViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Home(navController: NavHostController, myViewModel: MyViewModel) { // Home(navController: NavHostController)
+fun Home(navController: NavHostController, myViewModel: MyViewModel) {
     Scaffold(
         topBar = { News() },
         content = { GamesCatalog() },
