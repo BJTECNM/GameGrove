@@ -4,20 +4,26 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.gamegrove.viewmodel.data.MyViewModel
 import com.gamegrove.viewmodel.ui.Home
 import com.gamegrove.viewmodel.ui.Login
+import com.gamegrove.viewmodel.ui.SplashScreen
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(myViewModel: MyViewModel) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = AppScreens.Login.route) {
         composable(route = AppScreens.Home.route) {
-            Home() //Home(navController, viewModel)
+            Home(navController, myViewModel)
         }
 
         composable(route = AppScreens.Login.route) {
-            Login(navController)
+            Login(navController, myViewModel)
+        }
+
+        composable(route = AppScreens.SplashScreen.route) {
+            SplashScreen(navController, myViewModel)
         }
     }
 }
