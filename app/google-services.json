@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "787993448256",
+    "project_id": "game-grove",
+    "storage_bucket": "game-grove.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787993448256:android:7b65e49a940cd3b4b6f4a5",
+        "android_client_info": {
+          "package_name": "com.gamegrove"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787993448256-f9ib8n1g2jhmse73q9ov5l3iluj8aktp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gamegrove",
+            "certificate_hash": "dceac9d32330ddacec8ded759db550701d9538f9"
+          }
+        },
+        {
+          "client_id": "787993448256-ibvc6a600dsk9fabd6c7g84csakl8155.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDamsg_0wOQx5bUWPmOnVEFSmTPvUccx60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787993448256-ibvc6a600dsk9fabd6c7g84csakl8155.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

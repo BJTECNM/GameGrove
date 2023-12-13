@@ -8,13 +8,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,8 +21,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun Login() {
 
-    var user = ""
-    var password = ""
+    // var user = ""
+    // var password = ""
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -32,36 +30,9 @@ fun Login() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Inicio de sesión",
-            fontSize = 22.sp,
+            text = "Bienvenido a\n GameGrove",
+            fontSize = 32.sp,
             fontWeight = FontWeight.Bold
-        )
-
-        Space()
-
-        OutlinedTextField(
-            value = user,
-            onValueChange = { },
-            label = {
-                Text(text = "Usuario: ")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            singleLine = true
-        )
-
-        OutlinedTextField(
-            value = password,
-            onValueChange = { },
-            label = {
-                Text(text = "Contraseña: ")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            singleLine = true,
-            visualTransformation = PasswordVisualTransformation()
         )
 
         Space()
@@ -74,18 +45,10 @@ fun Login() {
         ) {
             Text(
                 text = "Ingresar",
-                fontSize = 18.sp,
-                modifier = Modifier.padding(4.dp)
+                fontSize = 22.sp,
+                modifier = Modifier.padding(8.dp)
             )
         }
-
-        Space()
-
-        Text(
-            text = "Olvidé mi contraseña",
-            fontSize = 18.sp,
-            modifier = Modifier.padding(4.dp)
-        )
     }
 }
 
