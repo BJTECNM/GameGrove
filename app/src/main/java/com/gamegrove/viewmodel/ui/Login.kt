@@ -44,9 +44,9 @@ fun Login(navController: NavHostController, myViewModel: MyViewModel) {
             val account = task.getResult(ApiException::class.java)
             val credential = GoogleAuthProvider.getCredential(account.idToken, null)
             myViewModel.signInWithGoogle(credential) {
+                navController.popBackStack()
                 navController.navigate(route = AppScreens.Home.route)
                 preferences.saveCredential(account.email ?: "")
-                navController.popBackStack()
             }
         } catch (ex: Exception) {
             Log.d(
