@@ -12,15 +12,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.gamegrove.navigation.AppScreens
 
-@Preview(showSystemUi = true)
 @Composable
-fun Login() {
-
+fun Login(navController: NavHostController) {
     // var user = ""
     // var password = ""
 
@@ -30,15 +31,21 @@ fun Login() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Bienvenido a\n GameGrove",
+            text = "Bienvenido a",
             fontSize = 32.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Text(
+            text = "GameGrove",
+            fontSize = 40.sp,
             fontWeight = FontWeight.Bold
         )
 
         Space()
 
         Button(
-            onClick = { },
+            onClick = { navController.navigate(AppScreens.Home.route) },
             Modifier
                 .fillMaxWidth()
                 .padding(start = 36.dp, end = 36.dp)
@@ -55,4 +62,44 @@ fun Login() {
 @Composable
 fun Space() {
     Spacer(modifier = Modifier.height(16.dp))
+}
+
+
+@Preview(showSystemUi = true)
+@Composable
+fun PreviewLogin() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Bienvenido a",
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Italic
+        )
+
+        Text(
+            text = "GameGrove",
+            fontSize = 40.sp,
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Italic
+        )
+
+        Spacer(modifier = Modifier.height(36.dp))
+
+        Button(
+            onClick = { },
+            Modifier
+                .fillMaxWidth()
+                .padding(start = 36.dp, end = 36.dp)
+        ) {
+            Text(
+                text = "Ingresar",
+                fontSize = 22.sp,
+                modifier = Modifier.padding(8.dp)
+            )
+        }
+    }
 }

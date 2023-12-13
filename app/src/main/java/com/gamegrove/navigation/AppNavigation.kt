@@ -11,13 +11,13 @@ import com.gamegrove.viewmodel.ui.Login
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = AppScreens.Home.route) {
+    NavHost(navController = navController, startDestination = AppScreens.Login.route) {
         composable(route = AppScreens.Home.route) {
             Home() //Home(navController, viewModel)
         }
 
         composable(route = AppScreens.Login.route) {
-            Login()
+            Login(navController)
         }
     }
 }
