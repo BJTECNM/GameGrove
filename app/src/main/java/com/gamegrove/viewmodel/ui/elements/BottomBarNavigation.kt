@@ -39,8 +39,8 @@ fun BottomBarNavigation(navController: NavHostController) {
                     navController.navigate(route = AppScreens.Search.route)
                 }
             },
-            icon = { Icon(imageVector = Icons.Filled.Search, contentDescription = "Busqueda") },
-            label = { Text(text = "Inicio") },
+            icon = { Icon(imageVector = Icons.Filled.Search, contentDescription = "Buscar") },
+            label = { Text(text = "Buscar") },
             alwaysShowLabel = false
         )
         NavigationBarItem(
@@ -52,7 +52,7 @@ fun BottomBarNavigation(navController: NavHostController) {
                 }
             },
             icon = { Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favoritos") },
-            label = { Text(text = "Inicio") },
+            label = { Text(text = "Favoritos") },
             alwaysShowLabel = false
         )
     }
