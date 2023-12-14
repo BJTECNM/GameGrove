@@ -5,8 +5,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gamegrove.viewmodel.data.MyViewModel
+import com.gamegrove.viewmodel.ui.Favorites
 import com.gamegrove.viewmodel.ui.Home
 import com.gamegrove.viewmodel.ui.Login
+import com.gamegrove.viewmodel.ui.Search
 import com.gamegrove.viewmodel.ui.SplashScreen
 
 @Composable
@@ -24,6 +26,14 @@ fun AppNavigation(myViewModel: MyViewModel) {
 
         composable(route = AppScreens.SplashScreen.route) {
             SplashScreen(navController)
+        }
+
+        composable(route = AppScreens.Search.route) {
+            Search(navController)
+        }
+
+        composable(route = AppScreens.Favorites.route) {
+            Favorites(navController)
         }
     }
 }

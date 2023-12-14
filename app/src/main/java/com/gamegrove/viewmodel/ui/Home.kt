@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.gamegrove.viewmodel.data.MyViewModel
+import com.gamegrove.viewmodel.ui.elements.BottomBarNavigation
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -26,7 +27,7 @@ fun Home(navController: NavHostController, myViewModel: MyViewModel) {
     Scaffold(
         topBar = { News() },
         content = { GamesCatalog() },
-        bottomBar = { Menu() }
+        bottomBar = { BottomBarNavigation(navController) }
     )
 }
 
@@ -66,20 +67,6 @@ fun GamesCatalog() {
 }
 
 @Composable
-fun Menu() {
-    Row(
-        Modifier
-            .fillMaxWidth()
-            .padding(bottom = 16.dp, top = 16.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Text(text = "Home")
-        Text(text = "Favorities")
-        Text(text = "Wishes")
-    }
-}
-
-@Composable
 fun RowItem(estreno: Int) {
     Column(Modifier.fillMaxWidth()) {
         AsyncImage(model = null, contentDescription = null)
@@ -103,6 +90,6 @@ fun Home() {
     Scaffold(
         topBar = { News() },
         content = { GamesCatalog() },
-        bottomBar = { Menu() }
+        //bottomBar = { Menu() }
     )
 }
