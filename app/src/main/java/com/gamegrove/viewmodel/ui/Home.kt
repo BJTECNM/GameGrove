@@ -1,11 +1,15 @@
 package com.gamegrove.viewmodel.ui
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,83 +17,56 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
 import com.gamegrove.viewmodel.data.MyViewModel
+import com.gamegrove.viewmodel.data.datagames.Games
+import com.gamegrove.viewmodel.data.datagames.Premieres
 import com.gamegrove.viewmodel.ui.elements.BottomBarNavigation
+import com.gamegrove.viewmodel.ui.elements.GridItem
+import com.gamegrove.viewmodel.ui.elements.RowItem
+import com.gamegrove.viewmodel.ui.elements.TopAppBar
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Home(navController: NavHostController, myViewModel: MyViewModel) {
     Scaffold(
-        topBar = { News() },
-        content = { GamesCatalog() },
+        topBar = { TopAppBar() },
         bottomBar = { BottomBarNavigation(navController) }
-    )
+    ) { innerPaddingValues ->
+        Games(innerPaddingValues)
+    }
 }
 
 @Composable
-fun News() {
+fun Games(innerPaddingValues: PaddingValues) {
+    val premieres = Premieres.items
+    val allGames = Games.items
+
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues = innerPaddingValues),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = "Próximos Estrenos",
             fontWeight = FontWeight.SemiBold,
             fontStyle = FontStyle.Italic,
-            fontSize = 22.sp,
+            fontSize = 18.sp,
             modifier = Modifier.padding(top = 16.dp)
         )
         // Carrusel de imágenes Horizontal
-        /*
-        LazyRow() {
-            items(estrenos) {
+        LazyRow(modifier = Modifier.fillMaxWidth()) {
+            items(premieres) {
                 RowItem(it)
             }
         }
-         */
-    }
-}
-
-@Composable
-fun GamesCatalog() {
-    /*
-    LazyVerticalGrid(columns = GridCells.Fixed(count = 2)) {
-        items(games) {
-            GridItem(it)
+        // Carrusel de imágenes Vertical
+        LazyVerticalGrid(columns = GridCells.Fixed(count = 2)) {
+            items(allGames) {
+                GridItem(it)
+            }
         }
     }
-     */
-}
-
-@Composable
-fun RowItem(estreno: Int) {
-    Column(Modifier.fillMaxWidth()) {
-        AsyncImage(model = null, contentDescription = null)
-        Text(text = "Nombre juego")
-    }
-}
-
-@Composable
-fun GridItem(game: Int) {
-    Column(Modifier.fillMaxWidth()) {
-        AsyncImage(model = null, contentDescription = null)
-        Text(text = "Nombre juego")
-    }
-}
-
-
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Preview(showSystemUi = true)
-@Composable
-fun Home() {
-    Scaffold(
-        topBar = { News() },
-        content = { GamesCatalog() },
-        //bottomBar = { Menu() }
-    )
 }

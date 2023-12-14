@@ -99,11 +99,6 @@ fun Login(navController: NavHostController, myViewModel: MyViewModel) {
     }
 }
 
-@Composable
-fun Space() {
-    Spacer(modifier = Modifier.height(16.dp))
-}
-
 
 @Preview(showSystemUi = true)
 @Composable
