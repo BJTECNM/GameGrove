@@ -45,7 +45,7 @@ fun Splash() {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "GameGrove",
+            text = "Game Grove",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold
         )

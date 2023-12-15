@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 fun TopAppBar() {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = "GameGrove")
+            Text(text = "Game Grove")
         },
         actions = {
             Icon(imageVector = Icons.Filled.AccountCircle,
