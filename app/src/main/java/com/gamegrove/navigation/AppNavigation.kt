@@ -29,11 +29,11 @@ fun AppNavigation(myViewModel: MyViewModel) {
         }
 
         composable(route = AppScreens.Search.route) {
-            Search(navController)
+            Search(navController, myViewModel)
         }
 
         composable(route = AppScreens.Favorites.route) {
-            Favorites(navController)
+            Favorites(navController, myViewModel)
         }
     }
 }

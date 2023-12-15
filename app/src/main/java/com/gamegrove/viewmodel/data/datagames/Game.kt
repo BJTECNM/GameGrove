@@ -1,8 +1,11 @@
 package com.gamegrove.viewmodel.data.datagames
 
+import androidx.annotation.DrawableRes
+
 data class Game(
     val title: String,
-    val image: String,
+    @DrawableRes val image: Int,
     val launch: Int,
-    val plataform: String
+    val plataform: String,
+    val description: String
 )

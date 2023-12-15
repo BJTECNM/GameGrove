@@ -43,6 +43,22 @@ fun Login(navController: NavHostController, myViewModel: MyViewModel) {
         try {
             val account = task.getResult(ApiException::class.java)
             val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+            Log.d(
+                "login", "Google SignIn " +
+                        credential
+            )
+            Log.d(
+                "login", "Google SignIn " +
+                        account.email
+            )
+            Log.d(
+                "login", "Google SignIn " +
+                        account.idToken
+            )
+            Log.d(
+                "login", "Google SignIn " +
+                        account.id
+            )
             myViewModel.signInWithGoogle(credential) {
                 navController.popBackStack()
                 navController.navigate(route = AppScreens.Home.route)
@@ -68,7 +84,7 @@ fun Login(navController: NavHostController, myViewModel: MyViewModel) {
         )
 
         Text(
-            text = "GameGrove",
+            text = "Game Grove",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold
         )

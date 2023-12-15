@@ -1,8 +1,6 @@
 package com.gamegrove.viewmodel.data
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.AuthCredential
@@ -38,8 +36,15 @@ class MyViewModel : ViewModel() {
         } catch (ex: Exception) {
             Log.d(
                 "login", "Error al logear: " +
-                        "${ex.localizedMessage}"
+                        ex.localizedMessage
             )
         }
+    }
+
+    fun signOut(){
+        auth.signOut()
+        Log.d(
+            "login", "signOut"
+        )
     }
 }

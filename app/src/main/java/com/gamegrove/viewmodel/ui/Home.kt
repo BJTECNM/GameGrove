@@ -14,18 +14,21 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.gamegrove.datastore.Preferences
+import com.gamegrove.navigation.AppScreens
 import com.gamegrove.viewmodel.data.MyViewModel
 import com.gamegrove.viewmodel.data.datagames.Games
 import com.gamegrove.viewmodel.data.datagames.Premieres
@@ -35,15 +38,23 @@ import com.gamegrove.viewmodel.ui.elements.RowItem
 
 @Composable
 fun Home(navController: NavHostController, myViewModel: MyViewModel) {
+    // val db = FirebaseFirestore.getInstance()
+    // val uid = Firebase.auth.currentUser!!.uid
     Scaffold(
         bottomBar = { BottomBarNavigation(navController) }
     ) { innerPaddingValues ->
-        Games(innerPaddingValues)
+        Games(navController, myViewModel, innerPaddingValues)
     }
 }
 
 @Composable
-fun Games(innerPaddingValues: PaddingValues) {
+fun Games(
+    navController: NavHostController,
+    myViewModel: MyViewModel,
+    innerPaddingValues: PaddingValues,
+) {
+    val context = LocalContext.current
+    val preferences = Preferences(context = context)
     val premieres = Premieres.items
     val allGames = Games.items
 
@@ -56,7 +67,7 @@ fun Games(innerPaddingValues: PaddingValues) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(32.dp),
+                .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Absolute.SpaceBetween
         ) {
@@ -64,22 +75,46 @@ fun Games(innerPaddingValues: PaddingValues) {
                 text = "Próximos Estrenos",
                 fontWeight = FontWeight.SemiBold,
                 fontStyle = FontStyle.Italic,
-                fontSize = 18.sp
+                fontSize = 22.sp
             )
-            Icon(imageVector = Icons.Filled.AccountCircle,
-                contentDescription = "LogOut",
-                modifier = Modifier
-                    .clickable { }
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ExitToApp,
+                    contentDescription = "LogOut",
+                    modifier = Modifier
+                        .clickable {
+                            myViewModel.signOut()
+                            preferences.saveCredential("")
+                            navController.popBackStack()
+                            navController.navigate(route = AppScreens.Login.route)
+                        }
+                )
+                Text(
+                    text = "Cerrar sesión",
+                    fontSize = 10.sp
+                )
+            }
+
         }
         // Carrusel de imágenes Horizontal
-        LazyRow(modifier = Modifier.fillMaxWidth()) {
+        LazyRow(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
             items(premieres) {
                 RowItem(it)
             }
         }
         // Carrusel de imágenes Vertical
-        LazyVerticalGrid(columns = GridCells.Fixed(count = 2)) {
+        LazyVerticalGrid(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
+            columns = GridCells.Fixed(count = 2)
+        ) {
             items(allGames) {
                 GridItem(it)
             }
