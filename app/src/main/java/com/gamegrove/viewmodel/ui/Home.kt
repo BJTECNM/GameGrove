@@ -38,8 +38,6 @@ import com.gamegrove.viewmodel.ui.elements.RowItem
 
 @Composable
 fun Home(navController: NavHostController, myViewModel: MyViewModel) {
-    // val db = FirebaseFirestore.getInstance()
-    // val uid = Firebase.auth.currentUser!!.uid
     Scaffold(
         bottomBar = { BottomBarNavigation(navController) }
     ) { innerPaddingValues ->
@@ -67,7 +65,7 @@ fun Games(
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(14.dp),
+                .padding(start = 18.dp, end = 18.dp, top = 14.dp, bottom = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Absolute.SpaceBetween
         ) {

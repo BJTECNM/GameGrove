@@ -292,7 +292,7 @@ object Games {
             description = ""
         ),
         Game(
-            title = "AEW Fight Forever ",
+            title = "AEW Fight Forever",
             image = R.drawable.aewfightforever,
             launch = 2023,
             plataform = "Nintendo Switch, Xbox Series X/S, PC, PlayStation 5",
