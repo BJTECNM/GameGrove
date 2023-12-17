@@ -1,6 +1,5 @@
 package com.gamegrove.viewmodel.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,8 +16,6 @@ import kotlinx.coroutines.launch
 class MyViewModel : ViewModel() {
     // Firebase
     private val _auth: FirebaseAuth = Firebase.auth
-    private val _db = FirebaseFirestore.getInstance()
-    private val _uid = Firebase.auth.currentUser!!.uid
 
     // Variables empleadas por la aplicación
     private val _error = MutableLiveData<String>()
@@ -52,7 +49,6 @@ class MyViewModel : ViewModel() {
             _auth.signInWithCredential(credential)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d("login", "Login exitoso")
                         login()
                     }
                 }
@@ -68,7 +64,7 @@ class MyViewModel : ViewModel() {
         _auth.signOut()
     }
 
-    fun addFavoriteItem(game: Game) = viewModelScope.launch {
+    fun addFavoriteItem(db: FirebaseFirestore, uid: String, game: Game) = viewModelScope.launch {
         try {
             val remindHashMap = hashMapOf(
                 "title" to game.title,
@@ -76,7 +72,7 @@ class MyViewModel : ViewModel() {
                 "plataform" to game.plataform,
                 "description" to game.description
             )
-            _db.collection(_uid).document(game.title).set(remindHashMap)
+            db.collection(uid).document(game.title).set(remindHashMap)
                 .addOnCompleteListener {
 
                 }
@@ -88,9 +84,9 @@ class MyViewModel : ViewModel() {
         }
     }
 
-    fun deleteFavoriteItem(game: Game) = viewModelScope.launch {
+    fun deleteFavoriteItem(db: FirebaseFirestore, uid: String, game: Game) = viewModelScope.launch {
         try {
-            _db.collection(_uid).document(game.title).delete()
+            db.collection(uid).document(game.title).delete()
                 .addOnCompleteListener {
 
                 }
@@ -102,9 +98,9 @@ class MyViewModel : ViewModel() {
         }
     }
 
-    fun getFavoriteList() = viewModelScope.launch {
+    fun getFavoriteList(db: FirebaseFirestore, uid: String) = viewModelScope.launch {
         try {
-            _db.collection(_uid)
+            db.collection(uid)
                 .get()
                 .addOnSuccessListener { documents ->
                     for (document in documents) {

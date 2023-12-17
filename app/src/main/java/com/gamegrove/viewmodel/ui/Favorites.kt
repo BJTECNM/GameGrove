@@ -22,6 +22,9 @@ import com.gamegrove.viewmodel.ui.elements.AlertError
 import com.gamegrove.viewmodel.ui.elements.BottomBarNavigation
 import com.gamegrove.viewmodel.ui.elements.ColumItem
 import com.gamegrove.viewmodel.ui.elements.TopAppBar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 @Composable
 fun Favorites(navController: NavHostController, myViewModel: MyViewModel) {
@@ -37,8 +40,10 @@ fun Favorites(navController: NavHostController, myViewModel: MyViewModel) {
 fun ListFavorites(myViewModel: MyViewModel, innerPaddingValues: PaddingValues) {
     val favoritesList: List<Game> by myViewModel.favoritesList.observeAsState(listOf())
     val error: String by myViewModel.error.observeAsState(initial = "")
+    val db = FirebaseFirestore.getInstance()
+    val uid = Firebase.auth.currentUser!!.uid
 
-    myViewModel.getFavoriteList()
+    myViewModel.getFavoriteList(db, uid)
 
     LazyColumn(
         modifier = Modifier
