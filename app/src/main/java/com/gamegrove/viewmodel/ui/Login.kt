@@ -13,18 +13,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.gamegrove.datastore.Preferences
 import com.gamegrove.navigation.AppScreens
 import com.gamegrove.viewmodel.data.MyViewModel
+import com.gamegrove.viewmodel.ui.elements.AlertError
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -35,6 +36,8 @@ fun Login(navController: NavHostController, myViewModel: MyViewModel) {
     val context = LocalContext.current
     val preferences = Preferences(context = context)
     val token = "787993448256-ibvc6a600dsk9fabd6c7g84csakl8155.apps.googleusercontent.com"
+    val error: String by myViewModel.error.observeAsState(initial = "")
+
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts
             .StartActivityForResult()
@@ -43,22 +46,7 @@ fun Login(navController: NavHostController, myViewModel: MyViewModel) {
         try {
             val account = task.getResult(ApiException::class.java)
             val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-            Log.d(
-                "login", "Google SignIn " +
-                        credential
-            )
-            Log.d(
-                "login", "Google SignIn " +
-                        account.email
-            )
-            Log.d(
-                "login", "Google SignIn " +
-                        account.idToken
-            )
-            Log.d(
-                "login", "Google SignIn " +
-                        account.id
-            )
+
             myViewModel.signInWithGoogle(credential) {
                 navController.popBackStack()
                 navController.navigate(route = AppScreens.Home.route)
@@ -113,44 +101,8 @@ fun Login(navController: NavHostController, myViewModel: MyViewModel) {
             )
         }
     }
-}
 
-
-@Preview(showSystemUi = true)
-@Composable
-fun PreviewLogin() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "Bienvenido a",
-            fontSize = 32.sp,
-            fontWeight = FontWeight.Bold,
-            fontStyle = FontStyle.Italic
-        )
-
-        Text(
-            text = "GameGrove",
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
-            fontStyle = FontStyle.Italic
-        )
-
-        Spacer(modifier = Modifier.height(36.dp))
-
-        Button(
-            onClick = { },
-            Modifier
-                .fillMaxWidth()
-                .padding(start = 36.dp, end = 36.dp)
-        ) {
-            Text(
-                text = "Ingresar",
-                fontSize = 22.sp,
-                modifier = Modifier.padding(8.dp)
-            )
-        }
+    if (error.isNotEmpty()) {
+        AlertError(myViewModel = myViewModel, error = error)
     }
 }

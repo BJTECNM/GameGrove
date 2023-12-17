@@ -17,10 +17,13 @@ import kotlinx.coroutines.launch
 class MyViewModel : ViewModel() {
     // Firebase
     private val _auth: FirebaseAuth = Firebase.auth
-    private val db = FirebaseFirestore.getInstance()
-    private val uid = Firebase.auth.currentUser!!.uid
+    private val _db = FirebaseFirestore.getInstance()
+    private val _uid = Firebase.auth.currentUser!!.uid
 
     // Variables empleadas por la aplicación
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
+
     private val _search = MutableLiveData<String>()
     val search: LiveData<String> = _search
 
@@ -39,22 +42,8 @@ class MyViewModel : ViewModel() {
         _searchResult.value = listResult
     }
 
-    fun getFavoriteList(){
-        db.collection(uid)
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val aux = Games.items.filter { it.title.contains(document.id, true) }
-                    _favoritesList.value = _favoritesList.value?.plus(aux) ?: listOf()
-                    val newList = mutableListOf<Game>()
-                    val aux2 = _favoritesList.value?.toHashSet()
-                    aux2?.forEach { newList.add(it) }
-                    _favoritesList.value = newList
-                }
-            }
-            .addOnFailureListener {
-
-            }
+    fun restoreErrorState() {
+        _error.value = ""
     }
 
     // Funciones Firebase
@@ -68,13 +57,10 @@ class MyViewModel : ViewModel() {
                     }
                 }
                 .addOnFailureListener {
-                    Log.d("login", "Login fallido")
+                    _error.value = "Login fallido\nVerifique su conexión a Internet"
                 }
         } catch (e: Exception) {
-            Log.d(
-                "login", "Error al logear: " +
-                        e.localizedMessage
-            )
+            _error.value = "Login fallido\nVerifique su conexión a Internet"
         }
     }
 
@@ -82,7 +68,7 @@ class MyViewModel : ViewModel() {
         _auth.signOut()
     }
 
-    fun addFavoriteItem(game: Game) {
+    fun addFavoriteItem(game: Game) = viewModelScope.launch {
         try {
             val remindHashMap = hashMapOf(
                 "title" to game.title,
@@ -90,35 +76,55 @@ class MyViewModel : ViewModel() {
                 "plataform" to game.plataform,
                 "description" to game.description
             )
-            db.collection(uid).document(game.title).set(remindHashMap)
+            _db.collection(_uid).document(game.title).set(remindHashMap)
                 .addOnCompleteListener {
 
                 }
                 .addOnFailureListener {
-
+                    _error.value = "No se pudo añadir a favoritos"
                 }
         } catch (e: Exception) {
+            _error.value = "No se pudo añadir a favoritos"
+        }
+    }
+
+    fun deleteFavoriteItem(game: Game) = viewModelScope.launch {
+        try {
+            _db.collection(_uid).document(game.title).delete()
+                .addOnCompleteListener {
+
+                }
+                .addOnFailureListener {
+                    _error.value = "No se pudo quitar de favoritos"
+                }
+        } catch (e: Exception) {
+            _error.value = "No se pudo quitar de favoritos"
             Log.d(
-                "login", "Error al guardar favorito: " +
+                "login", "Error al quitar favorito: " +
                         e.localizedMessage
             )
         }
     }
 
-    fun deleteFavoriteItem(game: Game) {
+    fun getFavoriteList() = viewModelScope.launch {
         try {
-            db.collection(uid).document(game.title).delete()
-                .addOnCompleteListener {
-
+            _db.collection(_uid)
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        val aux = Games.items.filter { it.title.contains(document.id, true) }
+                        _favoritesList.value = _favoritesList.value?.plus(aux) ?: listOf()
+                    }
+                    val auxList = mutableListOf<Game>()
+                    val aux = _favoritesList.value?.toHashSet()
+                    aux?.forEach { auxList.add(it) }
+                    _favoritesList.value = auxList
                 }
                 .addOnFailureListener {
-
+                    _error.value = "No se pudo cargar sus favoritos"
                 }
         } catch (e: Exception) {
-            Log.d(
-                "login", "Error al quitar favorito: " +
-                        e.localizedMessage
-            )
+            _error.value = "No se pudo cargar sus favoritos"
         }
     }
 }

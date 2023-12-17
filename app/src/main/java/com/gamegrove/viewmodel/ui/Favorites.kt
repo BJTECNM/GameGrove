@@ -14,9 +14,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.gamegrove.viewmodel.data.MyViewModel
 import com.gamegrove.viewmodel.data.datagames.Game
+import com.gamegrove.viewmodel.ui.elements.AlertError
 import com.gamegrove.viewmodel.ui.elements.BottomBarNavigation
 import com.gamegrove.viewmodel.ui.elements.ColumItem
 import com.gamegrove.viewmodel.ui.elements.TopAppBar
@@ -34,6 +36,7 @@ fun Favorites(navController: NavHostController, myViewModel: MyViewModel) {
 @Composable
 fun ListFavorites(myViewModel: MyViewModel, innerPaddingValues: PaddingValues) {
     val favoritesList: List<Game> by myViewModel.favoritesList.observeAsState(listOf())
+    val error: String by myViewModel.error.observeAsState(initial = "")
 
     myViewModel.getFavoriteList()
 
@@ -50,12 +53,15 @@ fun ListFavorites(myViewModel: MyViewModel, innerPaddingValues: PaddingValues) {
             item {
                 Text(
                     text = "Agrega juegos a tus favoritos para visualizarlos aquí",
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(32.dp),
+                    fontSize = 22.sp
                 )
             }
         }
+    }
+
+    if (error.isNotEmpty()) {
+        AlertError(myViewModel = myViewModel, error = error)
     }
 }

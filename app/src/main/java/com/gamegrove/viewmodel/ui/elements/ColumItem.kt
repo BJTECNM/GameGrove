@@ -45,11 +45,17 @@ fun ColumItem(game: Game) {
                 .padding(start = 16.dp)
         ) {
             Text(text = game.title)
+
             Spacer(modifier = Modifier.height(12.dp))
+
             Text(text = "Lanzamiento: ${game.launch}")
+
             Spacer(modifier = Modifier.height(12.dp))
+
             Text(text = "Plataformas: ${game.plataform}")
+
             Spacer(modifier = Modifier.height(12.dp))
+
             Text(text = "Generos ${game.description}")
         }
     }

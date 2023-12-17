@@ -19,6 +19,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -32,6 +34,7 @@ import com.gamegrove.navigation.AppScreens
 import com.gamegrove.viewmodel.data.MyViewModel
 import com.gamegrove.viewmodel.data.datagames.Games
 import com.gamegrove.viewmodel.data.datagames.Premieres
+import com.gamegrove.viewmodel.ui.elements.AlertError
 import com.gamegrove.viewmodel.ui.elements.BottomBarNavigation
 import com.gamegrove.viewmodel.ui.elements.GridItem
 import com.gamegrove.viewmodel.ui.elements.RowItem
@@ -46,15 +49,12 @@ fun Home(navController: NavHostController, myViewModel: MyViewModel) {
 }
 
 @Composable
-fun Games(
-    navController: NavHostController,
-    myViewModel: MyViewModel,
-    innerPaddingValues: PaddingValues,
-) {
+fun Games(navController: NavHostController, myViewModel: MyViewModel, innerPaddingValues: PaddingValues) {
     val context = LocalContext.current
     val preferences = Preferences(context = context)
     val premieres = Premieres.items
     val allGames = Games.items
+    val error: String by myViewModel.error.observeAsState(initial = "")
 
     Column(
         modifier = Modifier
@@ -117,5 +117,9 @@ fun Games(
                 GridItem(it)
             }
         }
+    }
+
+    if (error.isNotEmpty()) {
+        AlertError(myViewModel = myViewModel, error = error)
     }
 }
