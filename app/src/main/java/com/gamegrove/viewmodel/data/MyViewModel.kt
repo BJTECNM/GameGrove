@@ -99,10 +99,6 @@ class MyViewModel : ViewModel() {
                 }
         } catch (e: Exception) {
             _error.value = "No se pudo quitar de favoritos"
-            Log.d(
-                "login", "Error al quitar favorito: " +
-                        e.localizedMessage
-            )
         }
     }
 
