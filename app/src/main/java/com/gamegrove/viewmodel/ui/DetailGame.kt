@@ -43,26 +43,6 @@ fun DetailGame(myViewModel: MyViewModel) {
     val db = FirebaseFirestore.getInstance()
     val uid = Firebase.auth.currentUser!!.uid
 
-    /*
-        if (onFavorites) {
-            Icon(
-                imageVector = Icons.Filled.Favorite,
-                contentDescription = null,
-                modifier = Modifier.clickable {
-                    myViewModel.deleteFavoriteItem(db, uid, game)
-                })
-        } else {
-            Icon(imageVector = Icons.Filled.FavoriteBorder, contentDescription = null,
-                modifier = Modifier.clickable {
-                    myViewModel.addFavoriteItem(db, uid, game)
-                })
-        }
-     */
-
-    if (error.isNotEmpty()) {
-        AlertError(myViewModel = myViewModel, error = error)
-    }
-
     AlertDialog(
         icon = {
             Icon(
@@ -150,4 +130,8 @@ fun DetailGame(myViewModel: MyViewModel) {
         },
         onDismissRequest = { myViewModel.deselectGame() }
     )
+
+    if (error.isNotEmpty()) {
+        AlertError(myViewModel = myViewModel, error = error)
+    }
 }
