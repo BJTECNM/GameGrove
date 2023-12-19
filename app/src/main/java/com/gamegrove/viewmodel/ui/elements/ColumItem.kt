@@ -18,7 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.gamegrove.viewmodel.data.datagames.Game
 
 @Composable
@@ -44,19 +46,35 @@ fun ColumItem(game: Game) {
                 .fillMaxWidth()
                 .padding(start = 16.dp)
         ) {
-            Text(text = game.title)
+            Text(
+                text = game.title,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Text(text = "Lanzamiento: ${game.launch}")
+            Text(
+                text = "Lanzamiento: ${game.launch}",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Text(text = "Plataformas: ${game.plataform}")
+            Text(
+                text = "Plataformas: ${game.plataform}",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Text(text = "Generos ${game.description}")
+            Text(
+                text = "Generos: ${game.description}",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
         }
     }
 }

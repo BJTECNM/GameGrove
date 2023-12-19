@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gamegrove.viewmodel.data.MyViewModel
+import com.gamegrove.viewmodel.ui.DetailGame
 import com.gamegrove.viewmodel.ui.Favorites
 import com.gamegrove.viewmodel.ui.Home
 import com.gamegrove.viewmodel.ui.Login
@@ -34,6 +35,10 @@ fun AppNavigation(myViewModel: MyViewModel) {
 
         composable(route = AppScreens.Favorites.route) {
             Favorites(navController, myViewModel)
+        }
+
+        composable(route = AppScreens.DetailGame.route) {
+            DetailGame(myViewModel = myViewModel)
         }
     }
 }

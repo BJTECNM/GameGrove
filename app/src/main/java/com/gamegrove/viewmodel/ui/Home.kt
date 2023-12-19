@@ -102,7 +102,7 @@ fun Games(navController: NavHostController, myViewModel: MyViewModel, innerPaddi
             modifier = Modifier.fillMaxWidth(),
         ) {
             items(premieres) {
-                RowItem(it)
+                RowItem(navController, myViewModel, it)
             }
         }
         // Carrusel de imágenes Vertical
@@ -114,7 +114,7 @@ fun Games(navController: NavHostController, myViewModel: MyViewModel, innerPaddi
             columns = GridCells.Fixed(count = 2)
         ) {
             items(allGames) {
-                GridItem(it)
+                GridItem(navController, myViewModel, it)
             }
         }
     }

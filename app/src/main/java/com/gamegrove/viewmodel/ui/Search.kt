@@ -45,13 +45,13 @@ fun Search(navController: NavHostController, myViewModel: MyViewModel) {
         topBar = { TopAppBar(navController, myViewModel) },
         bottomBar = { BottomBarNavigation(navController) }
     ) { innerPaddingValues ->
-        Searching(myViewModel, innerPaddingValues)
+        Searching(navController, myViewModel, innerPaddingValues)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Searching(myViewModel: MyViewModel, innerPaddingValues: PaddingValues) {
+fun Searching(navController: NavHostController, myViewModel: MyViewModel, innerPaddingValues: PaddingValues) {
     var active by remember { mutableStateOf(false) }
     val search: String by myViewModel.search.observeAsState(initial = "")
     val searchResult: List<Game> by myViewModel.searchResult.observeAsState(listOf())
@@ -110,7 +110,7 @@ fun Searching(myViewModel: MyViewModel, innerPaddingValues: PaddingValues) {
                 columns = GridCells.Fixed(count = 2)
             ) {
                 items(searchResult) {
-                    GridItem(it)
+                    GridItem(navController, myViewModel, it)
                 }
             }
         }

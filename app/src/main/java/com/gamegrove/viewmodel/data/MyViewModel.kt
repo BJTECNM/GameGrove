@@ -30,6 +30,12 @@ class MyViewModel : ViewModel() {
     private val _favoritesList = MutableLiveData<List<Game>>()
     val favoritesList: LiveData<List<Game>> = _favoritesList
 
+    private val _gameSelected = MutableLiveData<Game>()
+    val gameSelected: LiveData<Game> = _gameSelected
+
+    private val _onFavorites = MutableLiveData<Boolean>()
+    val onFavorites: LiveData<Boolean> = _onFavorites
+
     // Funciones para modificar los valores de las variables
     fun changeSearch(search: String) {
         _search.value = search
@@ -41,6 +47,10 @@ class MyViewModel : ViewModel() {
 
     fun restoreErrorState() {
         _error.value = ""
+    }
+
+    fun selectGame(game: Game) {
+        _gameSelected.value = game
     }
 
     // Funciones Firebase
@@ -74,11 +84,12 @@ class MyViewModel : ViewModel() {
             )
             db.collection(uid).document(game.title).set(remindHashMap)
                 .addOnCompleteListener {
-
+                    _onFavorites.value = true
                 }
                 .addOnFailureListener {
                     _error.value = "No se pudo añadir a favoritos"
                 }
+            _onFavorites.value = true
         } catch (e: Exception) {
             _error.value = "No se pudo añadir a favoritos"
         }
@@ -88,17 +99,19 @@ class MyViewModel : ViewModel() {
         try {
             db.collection(uid).document(game.title).delete()
                 .addOnCompleteListener {
-
+                    _onFavorites.value = false
                 }
                 .addOnFailureListener {
                     _error.value = "No se pudo quitar de favoritos"
                 }
+            _onFavorites.value = false
         } catch (e: Exception) {
             _error.value = "No se pudo quitar de favoritos"
         }
     }
 
     fun getFavoriteList(db: FirebaseFirestore, uid: String) = viewModelScope.launch {
+        _favoritesList.value = emptyList()
         try {
             db.collection(uid)
                 .get()
@@ -117,6 +130,15 @@ class MyViewModel : ViewModel() {
                 }
         } catch (e: Exception) {
             _error.value = "No se pudo cargar sus favoritos"
+        }
+    }
+
+    fun verifyOnFavorites(game: Game) = viewModelScope.launch {
+        val aux = favoritesList.value?.filter { it.title.contains(game.title, true) }
+        if (aux.isNullOrEmpty()) {
+            _onFavorites.value = false
+        } else {
+            _onFavorites.value = true
         }
     }
 }

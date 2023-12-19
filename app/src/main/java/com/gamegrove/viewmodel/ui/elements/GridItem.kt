@@ -1,6 +1,7 @@
 package com.gamegrove.viewmodel.ui.elements
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,11 +18,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.gamegrove.navigation.AppScreens
+import com.gamegrove.viewmodel.data.MyViewModel
 import com.gamegrove.viewmodel.data.datagames.Game
 
 @Composable
-fun GridItem(game: Game) {
+fun GridItem(navController: NavHostController, myViewModel: MyViewModel, game: Game) {
     Column(
+        modifier = Modifier.clickable {
+            myViewModel.selectGame(game)
+            navController.navigate(AppScreens.DetailGame.route)
+        },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

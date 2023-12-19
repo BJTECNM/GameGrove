@@ -1,6 +1,7 @@
 package com.gamegrove.viewmodel.ui.elements
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,10 +18,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.gamegrove.navigation.AppScreens
+import com.gamegrove.viewmodel.data.MyViewModel
 import com.gamegrove.viewmodel.data.datagames.Game
 
 @Composable
-fun RowItem(game: Game) {
+fun RowItem(navController: NavHostController, myViewModel: MyViewModel, game: Game) {
     Column(
         Modifier
             .fillMaxWidth()
@@ -32,7 +36,11 @@ fun RowItem(game: Game) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(150.dp)
-                .clip(RoundedCornerShape(10.dp)),
+                .clip(RoundedCornerShape(10.dp))
+                .clickable {
+                    myViewModel.selectGame(game)
+                    navController.navigate(AppScreens.DetailGame.route)
+                },
             painter = painterResource(id = game.image),
             contentDescription = game.title,
             contentScale = ContentScale.Crop
