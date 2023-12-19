@@ -36,6 +36,9 @@ class MyViewModel : ViewModel() {
     private val _onFavorites = MutableLiveData<Boolean>()
     val onFavorites: LiveData<Boolean> = _onFavorites
 
+    private val _isSelected = MutableLiveData<Boolean>()
+    val isSelected: LiveData<Boolean> = _isSelected
+
     // Funciones para modificar los valores de las variables
     fun changeSearch(search: String) {
         _search.value = search
@@ -51,6 +54,11 @@ class MyViewModel : ViewModel() {
 
     fun selectGame(game: Game) {
         _gameSelected.value = game
+        _isSelected.value = true
+    }
+
+    fun deselectGame() {
+        _isSelected.value = false
     }
 
     // Funciones Firebase

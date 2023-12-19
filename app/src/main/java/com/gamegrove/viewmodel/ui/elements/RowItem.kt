@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,12 +21,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.gamegrove.navigation.AppScreens
 import com.gamegrove.viewmodel.data.MyViewModel
 import com.gamegrove.viewmodel.data.datagames.Game
+import com.gamegrove.viewmodel.ui.DetailGame
 
 @Composable
 fun RowItem(navController: NavHostController, myViewModel: MyViewModel, game: Game) {
+    val isSelected: Boolean by myViewModel.isSelected.observeAsState(initial = false)
+
     Column(
         Modifier
             .fillMaxWidth()
@@ -39,7 +43,6 @@ fun RowItem(navController: NavHostController, myViewModel: MyViewModel, game: Ga
                 .clip(RoundedCornerShape(10.dp))
                 .clickable {
                     myViewModel.selectGame(game)
-                    navController.navigate(AppScreens.DetailGame.route)
                 },
             painter = painterResource(id = game.image),
             contentDescription = game.title,
@@ -53,5 +56,9 @@ fun RowItem(navController: NavHostController, myViewModel: MyViewModel, game: Ga
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Center
         )
+    }
+
+    if (isSelected) {
+        DetailGame(myViewModel = myViewModel)
     }
 }
