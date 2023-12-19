@@ -1,6 +1,7 @@
 package com.gamegrove.viewmodel.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +9,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
@@ -40,9 +43,6 @@ fun DetailGame(myViewModel: MyViewModel) {
     val db = FirebaseFirestore.getInstance()
     val uid = Firebase.auth.currentUser!!.uid
 
-    myViewModel.getFavoriteList(db, uid)
-    myViewModel.verifyOnFavorites(game)
-
     /*
         if (onFavorites) {
             Icon(
@@ -67,10 +67,16 @@ fun DetailGame(myViewModel: MyViewModel) {
         icon = {
             Icon(
                 imageVector = Icons.Default.Info,
-                contentDescription = "Ha ocurrido un error"
+                contentDescription = "Detalles del juego"
             )
         },
-        title = { Text(text = game.title, fontWeight = FontWeight.Bold) },
+        title = {
+            Text(
+                text = game.title,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
+            )
+        },
         text = {
             Column(
                 modifier = Modifier.padding(16.dp),
@@ -86,6 +92,25 @@ fun DetailGame(myViewModel: MyViewModel) {
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
+
+                // *-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+                if (onFavorites) {
+                    Icon(
+                        imageVector = Icons.Filled.Favorite,
+                        contentDescription = null,
+                        modifier = Modifier.clickable {
+                            myViewModel.deleteFavoriteItem(db, uid, game)
+                        }
+                    )
+                } else {
+                    Icon(imageVector = Icons.Filled.FavoriteBorder,
+                        contentDescription = null,
+                        modifier = Modifier.clickable {
+                            myViewModel.addFavoriteItem(db, uid, game)
+                        }
+                    )
+                }
+                // *-*-*-*-*-*--*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-
 
                 Text(
                     text = "Lanzamiento: ${game.launch}",

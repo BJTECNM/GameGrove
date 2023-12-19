@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import com.gamegrove.viewmodel.data.MyViewModel
 
 @Composable
@@ -20,7 +21,13 @@ fun AlertError(myViewModel: MyViewModel, error: String) {
             )
         },
         title = { Text(text = "Ha ocurrido un error") },
-        text = { Text(text = error) },
+        text = {
+            Text(
+                text = error,
+                textAlign = TextAlign.Center,
+                fontSize = 20.sp
+            )
+        },
         confirmButton = {
             TextButton(onClick = { myViewModel.restoreErrorState() }) {
                 Text(

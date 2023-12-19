@@ -53,6 +53,7 @@ class MyViewModel : ViewModel() {
     }
 
     fun selectGame(game: Game) {
+        verifyOnFavorites(game)
         _gameSelected.value = game
         _isSelected.value = true
     }
