@@ -100,6 +100,7 @@ fun DetailGame(myViewModel: MyViewModel) {
                         contentDescription = null,
                         modifier = Modifier.clickable {
                             myViewModel.deleteFavoriteItem(db, uid, game)
+                            myViewModel.getFavoriteList(db, uid)
                         }
                     )
                 } else {
@@ -107,6 +108,7 @@ fun DetailGame(myViewModel: MyViewModel) {
                         contentDescription = null,
                         modifier = Modifier.clickable {
                             myViewModel.addFavoriteItem(db, uid, game)
+                            myViewModel.getFavoriteList(db, uid)
                         }
                     )
                 }

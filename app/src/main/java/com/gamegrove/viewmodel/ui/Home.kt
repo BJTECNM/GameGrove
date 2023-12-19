@@ -38,6 +38,9 @@ import com.gamegrove.viewmodel.ui.elements.AlertError
 import com.gamegrove.viewmodel.ui.elements.BottomBarNavigation
 import com.gamegrove.viewmodel.ui.elements.GridItem
 import com.gamegrove.viewmodel.ui.elements.RowItem
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 @Composable
 fun Home(navController: NavHostController, myViewModel: MyViewModel) {
@@ -55,6 +58,10 @@ fun Games(navController: NavHostController, myViewModel: MyViewModel, innerPaddi
     val premieres = Premieres.items
     val allGames = Games.items
     val error: String by myViewModel.error.observeAsState(initial = "")
+    val db = FirebaseFirestore.getInstance()
+    val uid = Firebase.auth.currentUser!!.uid
+
+    myViewModel.getFavoriteList(db, uid)
 
     Column(
         modifier = Modifier

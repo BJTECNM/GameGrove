@@ -24,15 +24,10 @@ import androidx.navigation.NavHostController
 import com.gamegrove.viewmodel.data.MyViewModel
 import com.gamegrove.viewmodel.data.datagames.Game
 import com.gamegrove.viewmodel.ui.DetailGame
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 
 @Composable
 fun GridItem(navController: NavHostController, myViewModel: MyViewModel, game: Game) {
     val isSelected: Boolean by myViewModel.isSelected.observeAsState(initial = false)
-    val db = FirebaseFirestore.getInstance()
-    val uid = Firebase.auth.currentUser!!.uid
 
     Column(
         modifier = Modifier.clickable {
@@ -58,7 +53,6 @@ fun GridItem(navController: NavHostController, myViewModel: MyViewModel, game: G
     }
 
     if (isSelected) {
-        myViewModel.getFavoriteList(db, uid)
         DetailGame(myViewModel = myViewModel)
     }
 }

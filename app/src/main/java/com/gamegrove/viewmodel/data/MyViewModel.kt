@@ -142,7 +142,7 @@ class MyViewModel : ViewModel() {
         }
     }
 
-    fun verifyOnFavorites(game: Game) = viewModelScope.launch {
+    fun verifyOnFavorites(game: Game) { // = viewModelScope.launch
         val aux = favoritesList.value?.filter { it.title.contains(game.title, true) }
         if (aux.isNullOrEmpty()) {
             _onFavorites.value = false
