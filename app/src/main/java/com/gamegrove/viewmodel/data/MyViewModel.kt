@@ -89,7 +89,7 @@ class MyViewModel : ViewModel() {
                 "title" to game.title,
                 "launch" to game.launch,
                 "plataform" to game.plataform,
-                "description" to game.description
+                "genre" to game.genre
             )
             db.collection(uid).document(game.title).set(remindHashMap)
                 .addOnCompleteListener {
@@ -142,7 +142,7 @@ class MyViewModel : ViewModel() {
         }
     }
 
-    fun verifyOnFavorites(game: Game) { // = viewModelScope.launch
+    private fun verifyOnFavorites(game: Game) = viewModelScope.launch {
         val aux = favoritesList.value?.filter { it.title.contains(game.title, true) }
         if (aux.isNullOrEmpty()) {
             _onFavorites.value = false

@@ -7,5 +7,5 @@ data class Game(
     @DrawableRes val image: Int,
     val launch: Int,
     val plataform: String,
-    val description: String
+    val genre: String
 )

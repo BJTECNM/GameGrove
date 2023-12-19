@@ -4,10 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -59,7 +62,7 @@ fun DetailGame(myViewModel: MyViewModel) {
         },
         text = {
             Column(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier.verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -72,27 +75,6 @@ fun DetailGame(myViewModel: MyViewModel) {
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
-
-                // *-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-                if (onFavorites) {
-                    Icon(
-                        imageVector = Icons.Filled.Favorite,
-                        contentDescription = null,
-                        modifier = Modifier.clickable {
-                            myViewModel.deleteFavoriteItem(db, uid, game)
-                            myViewModel.getFavoriteList(db, uid)
-                        }
-                    )
-                } else {
-                    Icon(imageVector = Icons.Filled.FavoriteBorder,
-                        contentDescription = null,
-                        modifier = Modifier.clickable {
-                            myViewModel.addFavoriteItem(db, uid, game)
-                            myViewModel.getFavoriteList(db, uid)
-                        }
-                    )
-                }
-                // *-*-*-*-*-*--*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-
 
                 Text(
                     text = "Lanzamiento: ${game.launch}",
@@ -113,11 +95,57 @@ fun DetailGame(myViewModel: MyViewModel) {
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Text(
-                    text = "Generos: ${game.description}",
+                    text = "Generos: ${game.genre}",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                if (onFavorites) {
+                    Row(
+                        Modifier
+                            .clickable {
+                                myViewModel.deleteFavoriteItem(db, uid, game)
+                                myViewModel.getFavoriteList(db, uid)
+                            },
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "Eliminar de favoritos",
+                            fontSize = 20.sp
+                        )
+
+                        Spacer(modifier = Modifier.width(16.dp))
+
+                        Icon(
+                            imageVector = Icons.Filled.Favorite,
+                            contentDescription = null
+                        )
+                    }
+                } else {
+                    Row(
+                        Modifier
+                            .clickable {
+                                myViewModel.addFavoriteItem(db, uid, game)
+                                myViewModel.getFavoriteList(db, uid)
+                            },
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "Añadir a favoritos",
+                            fontSize = 20.sp
+                        )
+
+                        Spacer(modifier = Modifier.width(16.dp))
+
+                        Icon(
+                            imageVector = Icons.Filled.FavoriteBorder,
+                            contentDescription = null
+                        )
+                    }
+                }
             }
         },
         confirmButton = {

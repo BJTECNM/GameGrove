@@ -52,7 +52,7 @@ fun ListFavorites(myViewModel: MyViewModel, innerPaddingValues: PaddingValues) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(favoritesList) {
-            ColumItem(it)
+            ColumItem(myViewModel, it)
         }
         if (favoritesList.isEmpty()) {
             item {
