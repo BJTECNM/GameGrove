@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.gamegrove.viewmodel.data.MyViewModel
 import com.gamegrove.viewmodel.data.datagames.Game
-import com.gamegrove.viewmodel.ui.DetailGame
 
 @Composable
 fun RowItem(navController: NavHostController, myViewModel: MyViewModel, game: Game) {
@@ -33,17 +33,18 @@ fun RowItem(navController: NavHostController, myViewModel: MyViewModel, game: Ga
         Modifier
             .fillMaxWidth()
             .height(200.dp)
-            .padding(start = 8.dp, end = 8.dp),
+            .padding(start = 8.dp, end = 8.dp)
+            .clickable {
+                myViewModel.selectPremiere()
+                myViewModel.selectGame(game)
+            },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             modifier = Modifier
-                .fillMaxWidth()
+                .width(350.dp)
                 .height(150.dp)
-                .clip(RoundedCornerShape(10.dp))
-                .clickable {
-                    myViewModel.selectGame(game)
-                },
+                .clip(RoundedCornerShape(10.dp)),
             painter = painterResource(id = game.image),
             contentDescription = game.title,
             contentScale = ContentScale.Crop

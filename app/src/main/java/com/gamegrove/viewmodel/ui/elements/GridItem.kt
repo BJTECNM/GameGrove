@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.gamegrove.viewmodel.data.MyViewModel
 import com.gamegrove.viewmodel.data.datagames.Game
-import com.gamegrove.viewmodel.ui.DetailGame
 
 @Composable
 fun GridItem(navController: NavHostController, myViewModel: MyViewModel, game: Game) {
