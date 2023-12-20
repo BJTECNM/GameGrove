@@ -54,6 +54,7 @@ fun ListFavorites(myViewModel: MyViewModel, innerPaddingValues: PaddingValues) {
         items(favoritesList) {
             ColumItem(myViewModel, it)
         }
+
         if (favoritesList.isEmpty()) {
             item {
                 Text(

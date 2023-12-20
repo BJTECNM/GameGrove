@@ -43,7 +43,9 @@ fun GridItem(navController: NavHostController, myViewModel: MyViewModel, game: G
             contentDescription = game.title,
             contentScale = ContentScale.Crop
         )
+
         Spacer(modifier = Modifier.height(12.dp))
+
         Text(
             text = game.title,
             fontWeight = FontWeight.SemiBold,

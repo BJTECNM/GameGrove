@@ -82,6 +82,7 @@ fun Games(navController: NavHostController, myViewModel: MyViewModel, innerPaddi
                 fontStyle = FontStyle.Italic,
                 fontSize = 22.sp
             )
+
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
@@ -104,7 +105,7 @@ fun Games(navController: NavHostController, myViewModel: MyViewModel, innerPaddi
             }
 
         }
-        // Carrusel de imágenes Horizontal
+
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
         ) {
@@ -112,7 +113,7 @@ fun Games(navController: NavHostController, myViewModel: MyViewModel, innerPaddi
                 RowItem(navController, myViewModel, it)
             }
         }
-        // Carrusel de imágenes Vertical
+
         LazyVerticalGrid(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(20.dp),
