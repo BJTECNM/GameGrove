@@ -18,6 +18,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -74,7 +75,8 @@ fun Login(navController: NavHostController, myViewModel: MyViewModel) {
         Text(
             text = "Game Grove",
             fontSize = 40.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Italic
         )
 
         Spacer(modifier = Modifier.height(36.dp))
